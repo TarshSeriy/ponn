@@ -9,10 +9,10 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 async def start(update: Update, context):
     keyboard = [
-        [KeyboardButton("🎉 Открыть поздравление", web_app=WebAppInfo(url="https://pon-alpha.vercel.app/"))]
+        [KeyboardButton("🎉 Йоооооооо нажимай жоск", web_app=WebAppInfo(url="https://pon-alpha.vercel.app/"))]
     ]
     await update.message.reply_text(
-        "С днюшкой твоей подруг! Жми кнопку 🎈",
+        "С днем рождения красотка! Жоск жми 🎈",
         reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     )
 
