@@ -13,8 +13,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [KeyboardButton("🎉 Йоооооооо нажимай жоск", web_app=WebAppInfo(url="https://pon-alpha.vercel.app/"))]
     ]
     await update.message.reply_text(
-        "С днем рождения красотка! Жоск жми 🎈",
-        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+        "С днем народження красуня! 🎈 Натискай кнопку, там сюрприз 👀\n\n"
+        "А ще напиши * '/ cat ' * і отримаєш мили котика 😻",
+        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True),
+        parse_mode="Markdown"
     )
 
 # Команда /cat — присылает рандомного кота
