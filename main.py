@@ -1,6 +1,8 @@
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler
 from dotenv import load_dotenv
+import os
+
 
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
