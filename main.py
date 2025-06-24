@@ -37,7 +37,7 @@ async def cat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception:
         await update.message.reply_text("Что-то пошло не так, котик убежал 😿")
 
-# текстовое сообщение (спасибо и т.п.)
+# любое сообщение (например, "спасибо")
 async def handle_thanks(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_text = update.message.text
     user = update.message.from_user
@@ -45,12 +45,12 @@ async def handle_thanks(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = (
         f"💌 Сообщение от @{user.username or user.first_name} (ID: {user.id}):\n"
         f"{user_text}\n\n"
-        f"Чтобы ответить, используй:\n/ответ {user.id} <текст>"
+        f"Чтобы ответить, используй:\n/otvet {user.id} <текст>"
     )
     await context.bot.send_message(chat_id=CREATOR_ID, text=msg)
     await update.message.reply_text("Спасибо за сообщение! Создатель его увидит и, может быть, ответит ❤️")
 
-# /ответ <user_id> <текст>
+# /otvet <user_id> <текст> — ответ от тебя
 async def reply_to_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != CREATOR_ID:
         await update.message.reply_text("⛔ Эту команду может использовать только создатель.")
@@ -63,13 +63,13 @@ async def reply_to_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=target_id, text=f"👤 Ответ от создателя:\n{reply_message}")
         await update.message.reply_text("✅ Ответ отправлен!")
     except:
-        await update.message.reply_text("⚠️ Неверный формат. Используй:\n/ответ user_id текст")
+        await update.message.reply_text("⚠️ Неверный формат. Используй:\n/otvet user_id текст")
 
-# запуск бота
+# запуск
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("cat", cat))
-app.add_handler(CommandHandler("ответ", reply_to_user))
+app.add_handler(CommandHandler("otvet", reply_to_user))  # латиницей!
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_thanks))
 
 app.run_polling()
