@@ -14,7 +14,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
     await update.message.reply_text(
         "С днем народження красуня! 🎈 Натискай кнопку, там сюрприз 👀\n\n"
-        "А ще напиши * '/ cat ' * і отримаєш мили котика 😻",
+        "А ще напиши *`/cat`* і отримаєш мили котика 😻",
         reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True),
         parse_mode="Markdown"
     )
