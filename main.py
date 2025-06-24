@@ -7,7 +7,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
-# Поздравление (с веб-приложением)
+# Команда /start — кнопка на веб-приложение
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [KeyboardButton(text="🎉 Открыть сюрприз", web_app=WebAppInfo(url="https://pon-gprfbhkrr-sergeys-projects-f4e91b78.vercel.app/"))],
@@ -15,7 +15,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     await update.message.reply_text("Привет! Я Кубарсыч 🎁\nНажми кнопку, чтобы открыть сюрприз!", reply_markup=reply_markup)
 
-# Котик
+# Команда /cat — отправка рандомного котика
 async def cat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         response = requests.get("https://api.thecatapi.com/v1/images/search")
@@ -25,9 +25,9 @@ async def cat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         await update.message.reply_text("Что-то пошло не так, котик убежал 😿")
 
-# Бот
+# Регистрируем команды
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("котик", cat))
+app.add_handler(CommandHandler("cat", cat))  # Заменено на "cat"
 
 app.run_polling()
