@@ -33,7 +33,7 @@ async def cat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         response = requests.get("https://api.thecatapi.com/v1/images/search")
         data = response.json()
         cat_url = data[0]["url"]
-        await update.message.reply_photo(cat_url, caption="Вот тебе котик 😻")
+        await update.message.reply_photo(cat_url, caption="Вот тебе котик ")
     except Exception:
         await update.message.reply_text("Что-то пошло не так, котик убежал 😿")
 
